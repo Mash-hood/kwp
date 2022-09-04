@@ -17,7 +17,21 @@ class kwp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Kowope Mobile Application',
       theme: theme,
-      home: const Home(),
+      // home: const Home(),
+      routes: {
+        '/': (context) => const Home(),
+        '/pay-page': (context) => PayScreen(),
+        '/receive-page': (context) => ReceiveScreen(),
+        '/transfer-page': (context) => TransferScreen(),
+        '/history-page': (context) => History(),
+        '/help-page': (context) => Help(),
+        '/settings-page': (context) => Settings(),
+        '/profile-page': (context) => Profile(),
+        '/login-page': (context) => Login(),
+        '/signup-page': (context) => Signup(),
+        '/signup1-page': (context) => SignupDetails1(),
+        '/signup2-page': (context) => SignupDetails2(),
+      },
     );
   }
 }

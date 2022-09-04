@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kwp/kwp-theme.dart';
 import 'package:kwp/screens/screens.dart';
-import 'package:kwp/widgets/bottomNav.dart';
+import 'package:kwp/widgets/bottomNavItem.dart';
+import 'package:kwp/widgets/drawer.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,35 +20,68 @@ class _HomeState extends State<Home> {
     TransferScreen(),
   ];
 
-  void _pageTapping(int index) {
-    setState(() {
-      _pageIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: KwpTheme.primaryVariant1,
       appBar: AppBar(
-          title: Text(
-        'KOWOPE',
-        style: KwpTheme.lightTextTheme.subtitle1,
+        iconTheme: const IconThemeData(size: 40),
+        title: Text(
+          'KOWOPE',
+          style: KwpTheme.lightTextTheme.subtitle1,
 
-        // Goldman overriding Poppins here; not really achieving design looks
-        /*
+          // Goldman overriding Poppins here; not really achieving design looks
+          /*
         style: TextStyle(
           fontFamily: 'Goldman',
           fontSize: 13,
+          //letterSpacing: 1.5,
           fontWeight: FontWeight.w700,
+           */
         ),
-
-             */
-      )),
-      // endDrawer: ,
+      ),
+      // endDrawer:
       body: pages[_pageIndex],
-      bottomNavigationBar: BottomNav(
-        index: _pageIndex,
-        onTapping: _pageTapping,
+      bottomNavigationBar: buildMyNavBar(context),
+      endDrawer: SideDrawer(),
+    );
+  }
+
+  Container buildMyNavBar(BuildContext context) {
+    return Container(
+      height: 56,
+      decoration: const BoxDecoration(
+        color: KwpTheme.primaryColor,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <BottomNavItem>[
+          BottomNavItem(
+            text: 'Pay',
+            selected: _pageIndex == 0,
+            onTapping: () {
+              setState(() {
+                _pageIndex = 0;
+              });
+            },
+          ),
+          BottomNavItem(
+              text: 'Receive',
+              selected: _pageIndex == 1,
+              onTapping: () {
+                setState(() {
+                  _pageIndex = 1;
+                });
+              }),
+          BottomNavItem(
+              text: 'Transfer',
+              selected: _pageIndex == 2,
+              onTapping: () {
+                setState(() {
+                  _pageIndex = 2;
+                });
+              }),
+        ],
       ),
     );
   }
