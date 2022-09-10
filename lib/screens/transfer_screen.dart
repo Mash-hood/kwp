@@ -21,7 +21,7 @@ class _TransferScreenState extends State<TransferScreen> {
 
   void _delete() {
     setState(() {
-      _displayedText = _displayedText == 'Enter amount'
+      _displayedText = _displayedText == 'Enter amount' || _displayedText == ''
           ? _displayedText
           : _displayedText.substring(0, _displayedText.length - 1);
     });
@@ -165,13 +165,16 @@ class _TransferScreenState extends State<TransferScreen> {
                     ),
                     NumberPadButton(
                       buttonText: 'Next',
-                      buttonColor: _displayedText == 'Enter amount'
+                      buttonColor: _displayedText == 'Enter amount' ||
+                              _displayedText == ''
                           ? Colors.white
                           : KwpTheme.primaryColorVariant2,
-                      textColor: _displayedText == 'Enter amount'
+                      textColor: _displayedText == 'Enter amount' ||
+                              _displayedText == ''
                           ? Colors.black12
                           : Colors.white,
-                      buttonAction: _displayedText == 'Enter amount'
+                      buttonAction: _displayedText == 'Enter amount' ||
+                              _displayedText == ''
                           ? () {}
                           : () {
                               Navigator.pushNamed(

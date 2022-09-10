@@ -19,7 +19,7 @@ class _ReceiveScreenState extends State<ReceiveScreen> {
 
   void _delete() {
     setState(() {
-      _displayedText = _displayedText == 'Enter amount'
+      _displayedText = _displayedText == 'Enter amount' || _displayedText == ''
           ? _displayedText
           : _displayedText.substring(0, _displayedText.length - 1);
     });
@@ -164,13 +164,16 @@ class _ReceiveScreenState extends State<ReceiveScreen> {
                     // then, Stateless widget can be used for Receive page. Performance topic
                     NumberPadButton(
                       buttonText: 'Next',
-                      buttonColor: _displayedText == 'Enter amount'
+                      buttonColor: _displayedText == 'Enter amount' ||
+                              _displayedText == ''
                           ? Colors.white
                           : KwpTheme.primaryColorVariant2,
-                      textColor: _displayedText == 'Enter amount'
+                      textColor: _displayedText == 'Enter amount' ||
+                              _displayedText == ''
                           ? Colors.black12
                           : Colors.white,
-                      buttonAction: _displayedText == 'Enter amount'
+                      buttonAction: _displayedText == 'Enter amount' ||
+                              _displayedText == ''
                           ? () {}
                           : () {
                               showModalBottomSheet(
