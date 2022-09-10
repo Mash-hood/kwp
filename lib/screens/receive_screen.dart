@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kwp/kwp-theme.dart';
-import 'package:kwp/widgets/numberPadButton.dart';
+import 'package:kwp/widgets/widgets.dart';
 
 class ReceiveScreen extends StatefulWidget {
   @override
@@ -8,7 +8,22 @@ class ReceiveScreen extends StatefulWidget {
 }
 
 class _ReceiveScreenState extends State<ReceiveScreen> {
-  final String _displayedText = 'Enter amount';
+  String _displayedText = 'Enter amount';
+
+  _valuesConcatinate(String input) {
+    setState(() {
+      _displayedText =
+          _displayedText == 'Enter amount' ? input : _displayedText + input;
+    });
+  }
+
+  void _delete() {
+    setState(() {
+      _displayedText = _displayedText == 'Enter amount'
+          ? _displayedText
+          : _displayedText.substring(0, _displayedText.length - 1);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +42,28 @@ class _ReceiveScreenState extends State<ReceiveScreen> {
                   "₦ ",
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 24,
                       fontFamily: 'Roboto'), // simple hack for naira symbol
                 ),
                 Expanded(
                   child: Text(
                     _displayedText,
-                    style: const TextStyle(
-                        fontSize: 20,
+                    style: TextStyle(
+                        fontSize: _displayedText == 'Enter amount' ? 24 : 30,
+                        letterSpacing: 1,
+                        fontFamily: 'Poppins',
                         fontWeight: FontWeight.w600,
-                        color: Colors.black12),
+                        color: _displayedText == 'Enter amount'
+                            ? Colors.black12
+                            : Colors.black),
                     textAlign: TextAlign.start,
                   ),
                 ),
-                const Icon(Icons.backspace,
-                    size: 25, color: KwpTheme.primaryColorVariant2),
-                //SizedBox(width: 40)
+                IconButton(
+                  onPressed: _delete,
+                  icon: const Icon(Icons.backspace,
+                      size: 25, color: KwpTheme.primaryColorVariant2),
+                ),
               ],
             ),
           ),
@@ -62,19 +83,19 @@ class _ReceiveScreenState extends State<ReceiveScreen> {
                       buttonText: '1',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('1'),
                     ),
                     NumberPadButton(
                       buttonText: '2',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('2'),
                     ),
                     NumberPadButton(
                       buttonText: '3',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('3'),
                     ),
                   ],
                 ),
@@ -85,19 +106,19 @@ class _ReceiveScreenState extends State<ReceiveScreen> {
                       buttonText: '4',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('4'),
                     ),
                     NumberPadButton(
                       buttonText: '5',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('5'),
                     ),
                     NumberPadButton(
                       buttonText: '6',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('6'),
                     ),
                   ],
                 ),
@@ -108,19 +129,19 @@ class _ReceiveScreenState extends State<ReceiveScreen> {
                       buttonText: '7',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('7'),
                     ),
                     NumberPadButton(
                       buttonText: '8',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('8'),
                     ),
                     NumberPadButton(
                       buttonText: '9',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('9'),
                     ),
                   ],
                 ),
@@ -131,19 +152,39 @@ class _ReceiveScreenState extends State<ReceiveScreen> {
                       buttonText: '.',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('.'),
                     ),
                     NumberPadButton(
                       buttonText: '0',
                       buttonColor: Colors.white,
                       textColor: Colors.black,
-                      buttonAction: () {},
+                      buttonAction: () => _valuesConcatinate('0'),
                     ),
+                    // TO DO ???: consider using Stateful builder for next button and display container
+                    // then, Stateless widget can be used for Receive page. Performance topic
                     NumberPadButton(
                       buttonText: 'Next',
-                      buttonColor: Colors.white,
-                      textColor: Colors.black12,
-                      buttonAction: () {},
+                      buttonColor: _displayedText == 'Enter amount'
+                          ? Colors.white
+                          : KwpTheme.primaryColorVariant2,
+                      textColor: _displayedText == 'Enter amount'
+                          ? Colors.black12
+                          : Colors.white,
+                      buttonAction: _displayedText == 'Enter amount'
+                          ? () {}
+                          : () {
+                              showModalBottomSheet(
+                                backgroundColor: Colors
+                                    .transparent, // to ensure built object's curves show
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return const PaymentOptionBottomSheet(
+                                    nfcPath: '/receive-page-nfc',
+                                    qrPath: '/receive-page-qr',
+                                  );
+                                },
+                              );
+                            },
                     ),
                   ],
                 )

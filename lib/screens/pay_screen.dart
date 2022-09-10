@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:kwp/kwp-theme.dart';
-import 'package:kwp/widgets/numberPadButton.dart';
-import 'package:kwp/widgets/paymentOptions.dart';
+import 'package:kwp/widgets/widgets.dart';
 
 class PayScreen extends StatelessWidget {
-  // final String _nfcPath = "/pay-page-nfc";
-  // final String _qrPath = '/pay-page-qr';
-
   @override
   Widget build(BuildContext context) {
     return Container(

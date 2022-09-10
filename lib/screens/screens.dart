@@ -12,3 +12,6 @@ export 'settings_screen.dart';
 export 'profile_screen.dart';
 export 'nfc_payment_page.dart';
 export 'qr_payment_page.dart';
+export 'nfc_receive_page.dart';
+export 'qr_receive_page.dart';
+export 'select_beneficiary_page.dart';
