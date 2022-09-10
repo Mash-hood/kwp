@@ -21,6 +21,8 @@ class kwp extends StatelessWidget {
       routes: {
         '/': (context) => const Home(),
         '/pay-page': (context) => PayScreen(),
+        '/pay-page-nfc': (context) => NFCPayScreen(),
+        '/pay-page-qr': (context) => QRPayScreen(),
         '/receive-page': (context) => ReceiveScreen(),
         '/transfer-page': (context) => TransferScreen(),
         '/history-page': (context) => History(),

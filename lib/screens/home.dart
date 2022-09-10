@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kwp/kwp-theme.dart';
 import 'package:kwp/screens/screens.dart';
-import 'package:kwp/widgets/bottomNavItem.dart';
-import 'package:kwp/widgets/drawer.dart';
+import 'package:kwp/widgets/widgets.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,15 +28,6 @@ class _HomeState extends State<Home> {
         title: Text(
           'KOWOPE',
           style: KwpTheme.lightTextTheme.subtitle1,
-
-          // Goldman overriding Poppins here; not really achieving design looks
-          /*
-        style: TextStyle(
-          fontFamily: 'Goldman',
-          fontSize: 13,
-          //letterSpacing: 1.5,
-          fontWeight: FontWeight.w700,
-           */
         ),
       ),
       // endDrawer:

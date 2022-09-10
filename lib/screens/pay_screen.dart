@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:kwp/kwp-theme.dart';
+import 'package:kwp/widgets/numberPadButton.dart';
+import 'package:kwp/widgets/paymentOptions.dart';
 
 class PayScreen extends StatelessWidget {
+  // final String _nfcPath = "/pay-page-nfc";
+  // final String _qrPath = '/pay-page-qr';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,44 +16,21 @@ class PayScreen extends StatelessWidget {
         children: <Widget>[
           const SizedBox(height: 100),
           Container(
-              //    color: Colors.lightGreenAccent,
-              padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-              height: 50,
-              child: Row(
-                children: const <Widget>[
-                  //SizedBox(width: 40),
-                  Expanded(
-                    child: Text(
-                      'Enter amount',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black12),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  Icon(Icons.backspace, size: 25, color: Color(0xFF00B9FF)),
-                  //SizedBox(width: 40)
-                ],
-              )
-
-              /*
-            Text(
-              'HERE',
-              // '₦ NUMBERS',
+            padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+            height: 50,
+            child: const Text(
+              'Use the NEXT button to proceed',
               style: TextStyle(
-                  fontSize: 300,
+                  fontSize: 20,
                   fontWeight: FontWeight.w500,
                   color: Colors.black),
               textAlign: TextAlign.start,
             ),
-
-             */
-              ),
+          ),
           const SizedBox(height: 150),
           Container(
             // padding: const EdgeInsets.all(5),
-            color: const Color(0xFFE9EAEE),
+            color: KwpTheme.buttonsBackDropColor,
             height: MediaQuery.of(context).size.height * 0.336,
             width: MediaQuery.of(context).size.width,
             child: Column(
@@ -55,22 +38,106 @@ class PayScreen extends StatelessWidget {
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[numPads('1'), numPads('2'), numPads('3')],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[numPads('4'), numPads('5'), numPads('6')],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[numPads('7'), numPads('8'), numPads('9')],
+                  children: <Widget>[
+                    NumberPadButton(
+                      buttonText: '1',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                    NumberPadButton(
+                      buttonText: '2',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                    NumberPadButton(
+                      buttonText: '3',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    numPads('.'),
-                    numPads('0'),
-                    numPads('Next')
+                    NumberPadButton(
+                      buttonText: '4',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                    NumberPadButton(
+                      buttonText: '5',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                    NumberPadButton(
+                      buttonText: '6',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    NumberPadButton(
+                      buttonText: '7',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                    NumberPadButton(
+                      buttonText: '8',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                    NumberPadButton(
+                      buttonText: '9',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    NumberPadButton(
+                      buttonText: '.',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                    NumberPadButton(
+                      buttonText: '0',
+                      buttonColor: Colors.white,
+                      textColor: Colors.black12,
+                      buttonAction: () {},
+                    ),
+                    NumberPadButton(
+                      buttonText: 'Next',
+                      buttonColor: KwpTheme.primaryColorVariant2,
+                      textColor: Colors.white,
+                      buttonAction: () {
+                        showModalBottomSheet(
+                          backgroundColor: Colors
+                              .transparent, // to ensure built object's curves show
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const PaymentOptionBottomSheet(
+                              nfcPath: '/pay-page-nfc',
+                              qrPath: '/pay-page-qr',
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ],
                 )
               ],
@@ -78,21 +145,6 @@ class PayScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget numPads(String label) {
-    return MaterialButton(
-      height: 55,
-      minWidth: 120,
-      onPressed: () {},
-      child: Center(
-        child: Text(label,
-            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 30)),
-      ),
-      color: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 10,
     );
   }
 }

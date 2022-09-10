@@ -10,3 +10,5 @@ export 'history_screen.dart';
 export 'help_screen.dart';
 export 'settings_screen.dart';
 export 'profile_screen.dart';
+export 'nfc_payment_page.dart';
+export 'qr_payment_page.dart';

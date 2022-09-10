@@ -8,6 +8,9 @@ class KwpTheme {
   static const accentFailed = Color(0xFFB00020);
   static const accentTextField = Color(0x35D9D9D9);
   static const unSelectedBN = Color(0xFFD9D9D9);
+  static const buttonsBackDropColor = Color(0xFFE9EAEE);
+  static const primaryColorVariant2 = Color(0xFF00B9FF);
+  static const bottomSheetColor = Color(0xFFF9FCFF);
 
   static TextTheme lightTextTheme = TextTheme(
     headline1: GoogleFonts.poppins(
